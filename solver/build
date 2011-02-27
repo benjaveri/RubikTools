@@ -1,0 +1,2 @@
+gcc -Wall -O2 -o solve optimal.c
+gcc -Wall -O2 -o twist twist.c
