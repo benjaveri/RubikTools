@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import sys
 
 #
 # converts a face description to a standard cube description
@@ -26,30 +25,38 @@ CENTERS = [  4, 13, 22, 31, 40, 49 ]
 
 NOTATION = 'FRBLUD'
 
+def F2C(desc):
+    # create notation conversion map
+    ncm = {}
+    for i,c in enumerate(CENTERS):
+        ncm[desc[c]] = NOTATION[i]
+
+    # produce cube
+    state = []
+    for cubie in CUBIES:
+        s = ''
+        for e in cubie:
+            s += ncm[desc[e]]
+        state.append (s)
+
+    # done
+    return state
+
 
 #
 # main
 #
+if __name__ == "__main__":
+    import sys
+    
+    # parse command line
+    desc = ''.join(sys.argv[1:])
+    if len(desc) != 6*9:
+        print "Invalid input"
+        sys.exit (-1)
 
+    # go
+    state = F2C(desc)
 
-# parse command line
-desc = ''.join(sys.argv[1:])
-if len(desc) != 6*9:
-    print "Invalid input"
-    sys.exit (-1)
-
-# create notation conversion map
-ncm = {}
-for i,c in enumerate(CENTERS):
-    ncm[desc[c]] = NOTATION[i]
-
-# produce cube
-state = []
-for cubie in CUBIES:
-    s = ''
-    for e in cubie:
-        s += ncm[desc[e]]
-    state.append (s)
-
-# emit result
-print ' '.join(state)
+    # emit result
+    print ' '.join(state)
