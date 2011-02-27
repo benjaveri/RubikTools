@@ -1,5 +1,5 @@
- R U B I C K  T O O L S
-========================
+ R U B I K  T O O L S
+======================
 
 This is a collection of C and Python programs to address the fascination I
 have had with both computuer science and Rubik's cubes ever since I've been
@@ -11,6 +11,12 @@ adaptation of his code as a general solver. The changes I made are purely to
 drive it automatically.
 
 Code is documented and serves as the manual. Happy hunting.
+
+Layout
+
+./solver/               Michael Reid's code adapted to be machine driven
+./utils/                Numerous command line utilities
+./utils/face2cube.py    turns a facecolor description into a solver compatible cubie description
 
 If you see anything interesting, have questions or just want to share
 something, please drop me an email.
