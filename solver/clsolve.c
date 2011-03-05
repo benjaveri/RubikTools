@@ -3889,13 +3889,13 @@ for (ii = 0; ii < count; ii++)
     printf(" %s", twist_string[turn_list[ii]]);
 printf ("\n");
 
-for (ii = 0; ii < count; ii++)
-    printf(" %s", twist_string[turn_list[ii]]);
+//for (ii = 0; ii < count; ii++)
+//    printf(" %s", twist_string[turn_list[ii]]);
 
-if (p_current_metric->metric == QUARTER_TURN_METRIC)
-   printf("  (%dq*, %df)\n", q_length, f_length);
-else
-   printf("  (%df*, %dq)\n", f_length, q_length);
+//if (p_current_metric->metric == QUARTER_TURN_METRIC)
+//   printf("  (%dq*, %df)\n", q_length, f_length);
+//else
+//   printf("  (%df*, %dq)\n", f_length, q_length);
 fflush(stdout);
 
 sol_found = 1;
@@ -4281,9 +4281,27 @@ for (ii = start_depth; ii <= search_limit; ii += p_current_metric->increment)
 return;
 }
 
+/* ========================================================================= */
+   int getprob (char *buf)
+/* ------------------------------------------------------------------------- */
+{
+    char *p = buf;
+    
+    while (1)
+    {
+        int ch = fgetc(stdin);
+        if ((ch == EOF) || (ch == '\n'))
+        {
+            *p = 0;
+            return ch != EOF;
+        }
+        *p++ = ch;
+    }            
+}
+
 
 /* ========================================================================= */
-   int  main(int argc,char *argv[])
+   int  main()
 /* ------------------------------------------------------------------------- */
 
 {
@@ -4291,29 +4309,26 @@ Metric_data             metric_data;
 Options                 user_options;
 Cube                    cube_struct;
 int                     stat;
-int                     i;
 char                    buf[512];
 
 init_options(&metric_data, &user_options);
 init_globals();
 
-buf[0] = 0;
-for (i = 1; i < argc; i++) 
+while (getprob(buf))
 {
-    strcat (buf,argv[i]);
-    strcat (buf," ");
+    printf ("INPUT: %s\n",buf);
+    if (!strcmp(buf,"exit")) break;
+
+    stat = string_to_cube(buf,&cube_struct,1);
+    if (stat != 0) exit (-1);
+
+    if (sigsetjmp(jump_env, 1) == 0)
+    {
+    signal(SIGINT, user_interrupt);
+    solve_cube(&cube_struct);
+    }
+    signal(SIGINT, SIG_IGN);
 }
-
-stat = string_to_cube(buf,&cube_struct,1);
-if (stat != 0) exit (-1);
-
-if (sigsetjmp(jump_env, 1) == 0)
-   {
-   signal(SIGINT, user_interrupt);
-   solve_cube(&cube_struct);
-   }
-signal(SIGINT, SIG_IGN);
-
 exit(EXIT_SUCCESS);
 
 return 0;  /*  haha  */
