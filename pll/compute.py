@@ -71,7 +71,7 @@ sols = solve(probs)
 # save results
 #
 with open('data.bin','wb') as f:
-    pickle.dump (f,CASES)
-    pickle.dump (f,probs)
-    pickle.dump (f,sols)
+    pickle.dump (CASES,f,2)
+    pickle.dump (probs,f,2)
+    pickle.dump (sols,f,2)
 

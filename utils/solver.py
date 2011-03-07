@@ -4,11 +4,15 @@ import re
 def solve (states):
     # prepare input
     lines = [ ' '.join(s) for s in states ]
-    input = '\n'.join(lines + [ 'exit' ])
+    input = '\n'.join(lines + [ 'exit\n' ])
     
     # spawn michael's excellent solver
     P = subprocess.Popen(["../solver/clsolve"],stdout=subprocess.PIPE,stderr=subprocess.STDOUT,stdin=subprocess.PIPE,shell=False)
     out,err = P.communicate(input)
+
+    #print out
+    #with open('out.txt','w') as f:
+    #    f.write (out)
 
     # parse results    
     results = []
@@ -25,5 +29,5 @@ def solve (states):
             part.append ((count,seq))
     
     # done        
-    return results
+    return results[1:]
     
