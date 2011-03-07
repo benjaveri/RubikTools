@@ -66,12 +66,10 @@ with open("html/index.html","w") as f:
         f.write ('<tr>')
         for x in range(4):
             i = y*4+x
-            f.write ('<td>')
             if i < len(CASES):
-                f.write ("<embed width='100' height='100' src='pll%02d.svg' type='image/svg+xml' />" % i)
+                f.write ("<td><embed width='100' height='100' src='pll%02d.svg' type='image/svg+xml' /></td>" % i)
                 sol = sols[i]
-                if len(sol) > 0: f.write ('%s' % sol[0][1])
-            f.write ('</td>')
+                f.write ('<td>%s</td>' % ' '.join(sol[0][1]))
         f.write ('</tr>\n')
     f.write ('</table></body></html>\n')
     
