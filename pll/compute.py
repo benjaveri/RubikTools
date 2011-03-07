@@ -31,7 +31,7 @@ CASES = [
 ]
 
 # rotate cases so i like them
-ROT  = [ 0,0,1,1, 1,0,1,1, 0,1,2,0, 1,1,0,2, 2,3,3,0, 0 ]
+ROT  = [ 2,2,1,1, 1,0,1,1, 0,1,2,0, 1,1,0,2, 2,3,3,0, 0 ]
 TROT = [ 6,3,0, 7,4,1, 8,5,2 ]
 for i,case in enumerate(CASES[:]):
     for j in range(ROT[i]):
