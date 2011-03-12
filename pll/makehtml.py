@@ -18,7 +18,7 @@ def line(f,x0,y0,x1,y1):
     f.write ('<line stroke="black" x1="%f" y1="%f" x2="%f" y2="%f" stroke-width=".3" />\n' % (x0,y0,x1,y1))
 
 def rect(f,x,y,w,h):
-    f.write ('<rect stroke="black" fill="white" x="%d" y="%d" width="%d" height="%d" stroke-width=".1" />\n' % (x,y,w,h))
+    f.write ('<rect stroke="black" fill="white" x="%d" y="%d" width="%d" height="%d" stroke-width=".2" />\n' % (x,y,w,h))
 
 def arrow(f,a,b):
     x0 = (a % 3)*10 + 5
@@ -56,7 +56,7 @@ for i,case in enumerate(CASES):
             for y in range(3):
                 rect (f,x*10,y*10,10,10)
         for i,c in enumerate(case):
-            if i != c: arrow (f,c,i)
+            if i != c: arrow (f,i,c)
         f.write ('</g>\n');
         f.write ('</svg>\n')
                     
@@ -67,9 +67,9 @@ with open("html/index.html","w") as f:
         for x in range(4):
             i = y*4+x
             if i < len(CASES):
-                f.write ("<td><embed width='100' height='100' src='pll%02d.svg' type='image/svg+xml' /></td>" % i)
+                f.write ('<td><table><tr><td align="center"><object data="pll%02d.svg" type="image/svg+xml"></object></td></tr>' % i)
                 sol = sols[i]
-                f.write ('<td>%s</td>' % ' '.join(sol[0][1]))
+                f.write ('<tr><td align="center">%s</td></tr></table>' % ' '.join(sol[0][1]))
         f.write ('</tr>\n')
     f.write ('</table></body></html>\n')
     

@@ -30,16 +30,17 @@ CASES = [
     [ 0,1,6, 5,4,3, 2,7,8 ],
 ]
 
+# reorder so i like em more
+CASES = [ CASES[i] for i in [ 0,1,2,3, 12,11,10,13, 15,16,17,18, 6,9,4,8, 5,7,19,20, 14 ]]
+
 # rotate cases so i like them
-ROT  = [ 2,2,1,1, 1,0,1,1, 0,1,2,0, 1,1,0,2, 2,3,3,0, 0 ]
+ROT  = [ 2,2,1,1, 1,1,3,1, 0,0,2,2, 1,3,1,2, 0,3,0,0, 0 ]
 TROT = [ 6,3,0, 7,4,1, 8,5,2 ]
 for i,case in enumerate(CASES[:]):
     for j in range(ROT[i]):
         case = [ case[k] for k in TROT ]
         case = [ TROT.index(case[k]) for k in range(9) ]
     CASES[i] = case
-# reorder so i like em more
-CASES = [ CASES[i] for i in [ 0,1,2,3, 10,11,12,13, 15,16,17,18, 6,9,4,8, 5,7,19,20, 14 ]]
 
 # cubie data
 CUBE = [ 'UF','UR','UB','UL','DF','DR','DB','DL','FR','FL','BR','BL','UFR','URB','UBL','ULF','DRF','DFL','DLB','DBR' ]
@@ -66,6 +67,7 @@ for case in CASES:
 # solve problems
 #
 sols = solve(probs)
+#sols = [ [ 'xxx','yyy' ] for i in range(21) ]
     
 #
 # save results
